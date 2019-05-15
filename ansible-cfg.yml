@@ -3,7 +3,7 @@
 
 - name: Creates {{ title }}
   hosts: localhost
-  gather_facts: False
+  gather_facts: True
 
   vars:
     title: ansible-cfg dirs
