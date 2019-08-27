@@ -9,4 +9,5 @@ From any pristine ansible playbook repo
 - `ansible-cfg.mk $config` will invoke `ansible-cfg.jsonnet` to create
   various ansible configs in `ansible-cfg` and link `ansible.cfg` to `$config` (default to `full`)
   
-- `ansible-cfg.yml` will create local dirs needed by ansible config and populate `.gitignore`
+- `ansible-cfg.yml -e dir=$(pwd)` will create local dirs needed by
+  ansible config and populate `.gitignore`
