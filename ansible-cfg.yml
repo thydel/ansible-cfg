@@ -8,6 +8,7 @@
   vars:
     title: ansible-cfg dirs
     dir: '{{ ansible_facts.env.PWD }}'
+    exclude: '{{ dir }}/.git/info/exclude'
 
   tasks:
 
@@ -19,7 +20,7 @@
 
     - copy: { dest: &gitignore '{{ dir }}/.gitignore', content: '*~', force: False }
 
-    - lineinfile: { path: *gitignore, line: '{{ item }}' }
+    - lineinfile: { path: '{{ exclude }}', line: '{{ item }}' }
       vars: { more: [ ansible-cfg, ansible.cfg, ext, vault-pass.py, private-repos.yml, keys.yml ] }
       loop: '{{ gitignore + more }}'
       name: Do not commit {{ title }}
