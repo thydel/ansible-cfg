@@ -1,5 +1,5 @@
 #!/usr/bin/env jsonnet
-# to be invoked as `$0 -m $(inventory) -S -V repo=$(git config remote.origin.url)`
+# to be invoked as `$0 -m $ansible_cfg_dir -S -V repo=$(git config remote.origin.url)`
 
 local ssh = {
   base: {
