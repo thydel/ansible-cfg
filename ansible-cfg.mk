@@ -14,11 +14,12 @@ install: $(install_list:%=$(install_dir)/%);
 
 repo != git config remote.origin.url
 
-stone := ansible-cfg/.stone
+confdir := ansible_cfg
+stone := $(confdir)/.stone
 $(stone): $(install_dir)/ansible-cfg.jsonnet; mkdir -p $(@D); jsonnet -m $(@D) -S -V repo=$(repo) $< && touch $@
 
 confs := mini full simple median nodes_groups
-$(confs): $(stone); ln -sf ansible-cfg/$@.cfg ansible.cfg
+$(confs): $(stone); ln -sf $(confdir)/$@.cfg ansible.cfg
 main: full
 
 .PHONY: top $(confs) main
