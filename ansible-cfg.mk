@@ -22,4 +22,6 @@ confs := mini full simple median nodes_groups
 $(confs): $(stone); ln -sf $(confdir)/$@.cfg ansible.cfg
 main: full
 
-.PHONY: top $(confs) main
+exclude:; ansible-cfg.yml -e dir=$$(pwd)
+
+.PHONY: top $(confs) main exclude
