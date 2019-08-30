@@ -6,7 +6,9 @@ SHELL := $(shell which bash)
 top:; @date
 
 install_dir := /usr/local/bin
-install_list := $(patsubst %, ansible-cfg.%, jsonnet mk yml)
+install_list := $(patsubst %, ansible-cfg.%, jsonnet mk yml) use-ansible.mk
+links := use-ansible ansible-cfg
+$(foreach link, $(links), $(eval $(link).mk := $(link)))
 $(install_dir)/%: %; install $< $@; $(if $($*),(cd $(@D); $(strip $(foreach _, $($*), ln -sf $* $_;))))
 install: $(install_list:%=$(install_dir)/%);
 
