@@ -9,6 +9,8 @@ $(self):;
 # get various ansible versions
 
 base := $(or $(GIT_CLONE_BASE), /usr/local/ext)
+base.help := sudo mkdir $(base); sudo chmod g+w $(base)
+$(and $(or $(wildcard $(base)),$(error you must create $(base) (e.g. "$(base.help)"))),)
 
 last           := 2.9
 stables.short  := 2.4 2.5 2.6 2.7 2.8 $(last)
