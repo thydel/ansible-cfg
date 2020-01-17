@@ -32,7 +32,7 @@ emacs +=   (setenv "PYTHONPATH" (expand-file-name "$(base)/ansible-$(version)/li
 emacs +=   (setenv "PATH" (concat (expand-file-name "$(base)/ansible-$(version)/bin:") (getenv "PATH"))))
 
 help:
-	@echo "sudo mkdir -p $(base); chown $$USER:staff $(base); chnod g+w $(base)"
+	@echo "sudo mkdir -p $(base); sudo chown $$USER:staff $(base); chmod g+w $(base)"
 	@echo
 	@$(foreach version,$(versions),echo '$(clone)';)
 	@echo
