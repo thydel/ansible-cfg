@@ -9,7 +9,7 @@ local ssh = {
 
 local inventory = {
   base: {
-    enable_plugins: 'yaml, ini',
+    enable_plugins: 'yaml, ini, host_list',
   },
 };
 
