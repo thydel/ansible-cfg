@@ -45,6 +45,10 @@ local defaults = {
     roles_path: 'roles',
     dirs:: self.roles_path,
   },
+  collections: {
+    collections_path: 'collections',
+    dirs:: self.collections_path,
+  },
   filter: {
     filter_plugins: 'plugins/filter',
     action_plugins: 'plugins/action',
@@ -83,7 +87,7 @@ local confs = {
     },
   },
   simple: self.mini + { sections +: { defaults +: defaults.log }},
-  median: self.mini + { sections +: { defaults +: defaults.log + defaults.roles + defaults.caching + defaults.filter + defaults.misc }},
+  median: self.mini + { sections +: { defaults +: defaults.log + defaults.roles + defaults.collections + defaults.caching + defaults.filter + defaults.misc }},
   full: self.mini + { sections +: { defaults: merge(defaults) }},
 };
 
