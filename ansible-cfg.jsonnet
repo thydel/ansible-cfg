@@ -21,7 +21,7 @@ local defaults = {
     inventory: 'inventory',
     hosts: 'default',
     retry_files_enabled: false,
-    dirs:: self.inventory,
+    // dirs:: self.inventory,
   },
   python: {
     intepreter_python: '/usr/bin/python3'
