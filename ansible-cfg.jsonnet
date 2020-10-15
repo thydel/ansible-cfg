@@ -23,6 +23,9 @@ local defaults = {
     retry_files_enabled: false,
     dirs:: self.inventory,
   },
+  python: {
+    intepreter_python: '/usr/bin/python3'
+  },
   vault: {
     vault_password_file: 'vault-pass.py'
   },
@@ -87,7 +90,7 @@ local confs = {
     },
   },
   simple: self.mini + { sections +: { defaults +: defaults.log }},
-  median: self.mini + { sections +: { defaults +: defaults.log + defaults.roles + defaults.collections + defaults.caching + defaults.filter + defaults.misc }},
+  median: self.mini + { sections +: { defaults +: defaults.python + defaults.log + defaults.roles + defaults.collections + defaults.caching + defaults.filter + defaults.misc }},
   full: self.mini + { sections +: { defaults: merge(defaults) }},
 };
 
@@ -99,10 +102,12 @@ local headerYml = std.join('\n', [ '---\n', info, '\n' ]);
 {
   [conf + '.cfg']: headerIni + std.manifestIni(confs[conf]) for conf in std.objectFields(confs) } + {
 
+  local p = [ defaults.log.dirs, defaults.collections.dirs ],
   local c = collect(defaults, 'dirs'),
   local i = std.uniq(std.sort(std.map(base, c))),
   local base(path) = std.split(path, '/')[0],
   'dirs.yml': headerYml + std.manifestYamlDoc({ dirs: c, gitignore: i }),
+  'dirs.mk': info + '\n\ndirs := ' + std.join(' ', p)
 }
   
 # Local Variables:
