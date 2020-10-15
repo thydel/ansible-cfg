@@ -18,8 +18,12 @@ confdir := ansible_cfg
 stone := $(confdir)/.stone
 $(stone): $(install_dir)/ansible-cfg.jsonnet; mkdir -p $(@D); jsonnet -m $(@D) -S -V repo=$(repo) $< && touch $@
 
+$(confdir)/dirs.mk: $(confdir)/dirs.yml
+-include $(confdir)/dirs.mk
+$(dirs):; mkdir -p $@
+
 confs := mini full simple median nodes_groups
-$(confs): $(stone); ln -sf $(confdir)/$@.cfg ansible.cfg
+$(confs): $(stone) | $(dirs); ln -sf $(confdir)/$@.cfg ansible.cfg
 main: full
 
 exclude:; ansible-cfg.yml -e dir=$$(pwd)
