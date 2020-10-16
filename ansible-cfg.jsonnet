@@ -24,7 +24,7 @@ local defaults = {
     // dirs:: self.inventory,
   },
   python: {
-    intepreter_python: '/usr/bin/python3'
+    intepreter_python: auto_silent
   },
   vault: {
     vault_password_file: 'vault-pass.py'
