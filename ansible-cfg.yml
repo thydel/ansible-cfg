@@ -22,6 +22,6 @@
     - copy: { dest: &gitignore '{{ dir }}/.gitignore', content: '*~', force: False }
 
     - lineinfile: { path: '{{ exclude }}', line: '{{ item }}' }
-      vars: { more: [ '{{ confdir }}', ansible.cfg, ext, vault-pass.py, private-repos.yml, keys.yml ] }
+      vars: { more: [ '{{ confdir }}', ansible.cfg, ext, vault-pass.py, private-repos.yml, keys.yml, inventory ] }
       loop: '{{ gitignore + more }}'
       name: Do not commit {{ title }}
