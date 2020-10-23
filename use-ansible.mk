@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+MAKEFLAGS += -Rr --warn-undefined-variables
+
 top: default
 
 self    := $(lastword $(MAKEFILE_LIST))
@@ -8,7 +10,8 @@ $(self):;
 
 # get various ansible versions
 
-base := $(or $(GIT_CLONE_BASE), /usr/local/ext)
+GIT_CLONE_BASE ?= /usr/local/ext
+base := $(GIT_CLONE_BASE)
 base.help := sudo mkdir $(base); sudo chmod g+w $(base)
 $(and $(or $(wildcard $(base)),$(error you must create $(base) (e.g. "$(base.help)"))),)
 
