@@ -18,6 +18,7 @@ confdir := ansible_cfg
 stone := $(confdir)/.stone
 $(stone): $(install_dir)/ansible-cfg.jsonnet; mkdir -p $(@D); jsonnet -m $(@D) -S -V repo=$(repo) $< && touch $@
 
+dirs :=
 $(confdir)/dirs.mk: $(confdir)/dirs.yml
 -include $(confdir)/dirs.mk
 $(dirs):; mkdir -p $@
