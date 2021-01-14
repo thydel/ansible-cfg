@@ -107,7 +107,7 @@ local headerYml = std.join('\n', [ '---\n', info, '\n' ]);
   local c = collect(defaults, 'dirs'),
   local i = std.uniq(std.sort(std.map(base, c))),
   local base(path) = std.split(path, '/')[0],
-  'dirs.yml': headerYml + std.manifestYamlDoc({ dirs: c, gitignore: i }),
+  'dirs.yml': headerYml + std.manifestYamlDoc({ dirs: c + p, gitignore: i }),
   'dirs.mk': info + '\n\ndirs := ' + std.join(' ', p)
 }
   
