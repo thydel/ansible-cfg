@@ -11,3 +11,7 @@ From any pristine ansible playbook repo
   
 - `ansible-cfg.yml -e dir=$(pwd)` will create local dirs needed by
   ansible config and populate `.gitignore` and/or `.git/info/exclude`
+
+- `ansible-cfg.mk exclude` is a shorthand for `ansible-cfg.yml -e dir=$(pwd)`
+
+- `ansible-cfg` is a shorthand for `ansible-cfg.mk`
