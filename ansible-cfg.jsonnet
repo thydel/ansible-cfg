@@ -40,6 +40,11 @@ local defaults = {
     fact_caching_timeout: 86400,
     dirs:: self.fact_caching_connection,
   },
+  cached_inventory: {
+    path: '.cache/inventory',
+    inventory: std.join(',', [ $.base.inventory, self.path ]),
+    dirs: self.path,
+  },
   retry: {
     retry_files_enabled: true,
     retry_files_save_path: '.retry',
@@ -91,7 +96,9 @@ local confs = {
     },
   },
   simple: self.mini + { sections +: { defaults +: defaults.log }},
-  median: self.mini + { sections +: { defaults +: defaults.python + defaults.log + defaults.roles + defaults.collections + defaults.caching + defaults.filter + defaults.misc }},
+  median: self.mini + { sections +: { defaults +:
+      defaults.python + defaults.log + defaults.roles + defaults.collections
+    + defaults.caching + defaults.cached_inventory + defaults.filter + defaults.misc }},
   full: self.mini + { sections +: { defaults: merge(defaults) }},
 };
 
