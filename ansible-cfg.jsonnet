@@ -41,8 +41,9 @@ local defaults = {
     dirs:: self.fact_caching_connection,
   },
   cached_inventory: {
-    path: '.cache/inventory',
+    path:: '.cache/inventory',
     inventory: std.join(',', [ $.base.inventory, self.path ]),
+    cached_inventory: self.path,
     dirs: self.path,
   },
   retry: {
