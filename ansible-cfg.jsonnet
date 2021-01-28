@@ -13,6 +13,13 @@ local inventory = {
   },
 };
 
+local locals = {
+  cached_inventory: {
+    path:: '.cache/inventory',
+    cached_inventory: self.path,
+  },
+};
+
 local defaults = {
 
   local dir(path) = local tmp = std.split(path, '/'); std.join('/', tmp[:std.length(tmp) - 1]),
@@ -41,9 +48,8 @@ local defaults = {
     dirs:: self.fact_caching_connection,
   },
   cached_inventory: {
-    path:: '.cache/inventory',
+    path:: locals.cached_inventory.path,
     inventory: std.join(',', [ $.base.inventory, self.path ]),
-    cached_inventory: self.path,
     dirs: self.path,
   },
   retry: {
@@ -96,11 +102,14 @@ local confs = {
       inventory: inventory.base,
     },
   },
+
+
   simple: self.mini + { sections +: { defaults +: defaults.log }},
-  median: self.mini + { sections +: { defaults +:
+  cached_inventory: self.simple + {sections +: { defaults +: defaults.cached_inventory, locals: locals.cached_inventory }},
+  median: self.cached_inventory + { sections +: { defaults +:
       defaults.python + defaults.log + defaults.roles + defaults.collections
-    + defaults.caching + defaults.cached_inventory + defaults.filter + defaults.misc }},
-  full: self.mini + { sections +: { defaults: merge(defaults) }},
+    + defaults.caching + defaults.filter + defaults.misc }},
+  full: self.median + { sections +: { defaults: merge(defaults) }},
 };
 
 local mode = '# -*- Mode: conf; -*-';
