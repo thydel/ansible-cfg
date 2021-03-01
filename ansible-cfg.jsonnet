@@ -51,6 +51,7 @@ local defaults = {
     path:: locals.cached_inventory.path,
     inventory: std.join(',', [ $.base.inventory, self.path ]),
     dirs: self.path,
+    files: self.dirs + "/dummy",
   },
   retry: {
     retry_files_enabled: true,
@@ -122,9 +123,11 @@ local headerYml = std.join('\n', [ '---\n', info, '\n' ]);
 
   local p = [ defaults.log.dirs, defaults.collections.dirs ],
   local c = collect(defaults, 'dirs'),
+  local f = collect(defaults, 'files'),
   local i = std.uniq(std.sort(std.map(base, c))),
   local base(path) = std.split(path, '/')[0],
   'dirs.yml': headerYml + std.manifestYamlDoc({ dirs: c + p, gitignore: i }),
+  'files.yml': headerYml + std.manifestYamlDoc({ files: f }),
   'dirs.mk': info + '\n\ndirs := ' + std.join(' ', p)
 }
   
