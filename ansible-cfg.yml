@@ -19,6 +19,12 @@
       loop: '{{ dirs }}'
       name: Creates {{ title }}
 
+    - include_vars: '{{ dir }}/{{ confdir }}/files.yml'
+
+    - file: { path: '{{ dir}}/{{ item }}', state: touch }
+      loop: '{{ files }}'
+      name: Creates {{ title }}
+
     - copy: { dest: &gitignore '{{ dir }}/.gitignore', content: '*~', force: False }
 
     - lineinfile: { path: '{{ exclude }}', line: '{{ item }}' }
