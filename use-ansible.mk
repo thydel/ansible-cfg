@@ -15,8 +15,8 @@ base := $(GIT_CLONE_BASE)
 base.help := sudo mkdir $(base); sudo chmod g+w $(base)
 $(and $(or $(wildcard $(base)),$(error you must create $(base) (e.g. "$(base.help)"))),)
 
-last           := 2.12
-stables.short  := 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 $(last)
+last           := 2.13
+stables.short  := 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 2.12 $(last)
 stables        := 1.9 2.0 2.1 2.2 2.3 $(stables.short)
 versions       := $(stables:%=stable-%) devel
 versions.short := $(stables.short:%=stable-%) devel
