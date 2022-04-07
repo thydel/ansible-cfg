@@ -22,7 +22,7 @@ versions       := $(stables:%=stable-%) devel
 versions.short := $(stables.short:%=stable-%) devel
 version.last   := $(last:%=stable-%)
 
-url := git://github.com/ansible/ansible.git
+url := https://github.com/ansible/ansible.git
 
 clone = (cd $(base) && test -d ansible-$(version) || git clone --branch $(version) --recursive $(url) ansible-$(version))
 #pull  = (cd $(base)/ansible-$(version) && git pull --rebase && git submodule update --init --recursive)
